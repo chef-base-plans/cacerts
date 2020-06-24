@@ -12,8 +12,9 @@ control 'core-plans-cacerts-exists' do
   '
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
-    its('exit_status') { should eq 0 }
     its('stdout') { should_not be_empty }
+    its('stderr') { should be_empty }
+    its('exit_status') { should eq 0 }
   end
 
   certificate_relative_path = input('certificate_relative_path', value: '/ssl/cert.pem')
@@ -24,7 +25,8 @@ control 'core-plans-cacerts-exists' do
 
   cacerts_file_includes = command("grep \"Certificate data from Mozilla\" #{certificate_full_path}")
   describe cacerts_file_includes do
-    its('exit_status') { should eq 0 }
     its('stdout') { should_not be_empty }
+    its('stderr') { should be_empty }
+    its('exit_status') { should eq 0 }
   end
 end
