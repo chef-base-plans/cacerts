@@ -45,6 +45,6 @@ do_build() {
 
 do_install() {
   mkdir -pv "$pkg_prefix/ssl/certs"
-  cp -v "$pkg_filename" "$pkg_prefix/ssl/certs"
-  ln -sv certs/cacert-${version}.pem "$pkg_prefix/ssl/cert.pem"
+  cp -v "$pkg_filename" "$pkg_prefix/ssl/certs/cacert.pem"
+  ln -sv certs/cacert.pem "$pkg_prefix/ssl/cert.pem"
 }
