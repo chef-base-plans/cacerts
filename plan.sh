@@ -1,6 +1,6 @@
 pkg_name=cacerts
 pkg_origin=core
-version=2021-09-30
+version=2021-10-26
 pkg_description="\
 The Mozilla CA certificate store in PEM format (around 250KB uncompressed).
 "
