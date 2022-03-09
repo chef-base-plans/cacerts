@@ -11,6 +11,22 @@ pkg_source="http://curl.haxx.se/ca/cacert-${pkg_version}.pem"
 pkg_deps=()
 pkg_build_deps=()
 
+pkg_version() {
+  local build_date
+  # Extract the build date of the certificates file
+  # shellcheck disable=SC2002
+  build_date="$(cat "$HAB_CACHE_SRC_PATH/$pkg_filename" \
+    | grep 'Certificate data from Mozilla' \
+    | sed 's/^## Certificate data from Mozilla as of: //')"
+
+  # Update the `$pkg_version` value with the build date
+  date --date="$build_date" "+%Y.%m.%d"
+}
+
+do_download() {
+  do_default_download
+  update_pkg_version
+}
 
 # Verify? This file? From the internet? Not just yet... ;)
 do_verify() {
